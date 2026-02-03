@@ -20,18 +20,21 @@ export default async function Page() {
     x: "https://x.com/mamuttdehielo?s=21",
   };
 
+const COVER_IMAGE = "/model/cover.jpg";
   return (
     <main
-      style={{
-        minHeight: "100vh",
-        background:
-          "radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,0.10), rgba(0,0,0,1))",
-        color: "white",
-        display: "grid",
-        placeItems: "center",
-        padding: 24,
-        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial",
-      }}
+  style={{
+    minHeight: "100vh",
+    background: `
+      linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
+      url(${COVER_IMAGE}) center / cover no-repeat
+    `,
+    color: "white",
+    display: "grid",
+    placeItems: "center",
+    padding: 24,
+  }}
+>
     >
       <div style={{ width: "100%", maxWidth: 720 }}>
         <div style={{ textAlign: "center" }}>
@@ -64,7 +67,7 @@ export default async function Page() {
               boxShadow: "0 12px 30px rgba(0,0,0,0.35)",
             }}
           >
-            ⭐️ Unlock Full Access (OF)
+            ⭐️ OF
           </a>
 
           {/* Links secundarios */}
