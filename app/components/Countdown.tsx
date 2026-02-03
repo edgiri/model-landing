@@ -6,50 +6,31 @@ function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-export default function Countdown({ minutes = 15 }: { minutes?: number }) {
-  const totalSeconds = useMemo(() => minutes * 60, [minutes]);
-  const [secondsLeft, setSecondsLeft] = useState(totalSeconds);
+export default function Countdown({ endsAtISO }: { endsAtISO: string }) {
+  const end = useMemo(() => new Date(endsAtISO).getTime(), [endsAtISO]);
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    setSecondsLeft(totalSeconds);
-    const t = setInterval(() => {
-      setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
-    }, 1000);
+    const t = setInterval(() => setNow(Date.now()), 250);
     return () => clearInterval(t);
-  }, [totalSeconds]);
+  }, []);
 
-  const mm = Math.floor(secondsLeft / 60);
-  const ss = secondsLeft % 60;
+  const diff = Math.max(0, end - now);
+  const total = Math.floor(diff / 1000);
 
-  const expired = secondsLeft === 0;
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const seconds = total % 60;
 
   return (
-    <div
-      style={{
-        marginTop: 14,
-        padding: "14px 18px",
-        borderRadius: 16,
-        border: "1px solid rgba(255,255,255,0.12)",
-        background: "rgba(255,255,255,0.06)",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 12,
-      }}
-    >
-      <div style={{ fontSize: 14, opacity: 0.8 }}>
-        {expired ? "Offer ended" : "Limited access"}
+    <div style={{ textAlign: "center" }}>
+      <div style={{ fontSize: 54, fontWeight: 900, letterSpacing: 1 }}>
+        {pad(hours)}:{pad(minutes)}:{pad(seconds)}
       </div>
-      <div
-        style={{
-          fontSize: 28,
-          fontWeight: 800,
-          letterSpacing: 1,
-          minWidth: 92,
-          textAlign: "right",
-        }}
-      >
-        {pad(mm)}:{pad(ss)}
+      <div style={{ opacity: 0.75, letterSpacing: 5, marginTop: 6 }}>
+        HR&nbsp;&nbsp;&nbsp;MIN&nbsp;&nbsp;&nbsp;SEG
       </div>
     </div>
   );
 }
+

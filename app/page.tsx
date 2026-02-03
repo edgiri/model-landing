@@ -1,117 +1,198 @@
+import Image from "next/image";
 import { headers } from "next/headers";
 import Countdown from "./components/Countdown";
 
+function IconButton({ href, text }: { href: string; text: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        width: 68,
+        height: 68,
+        borderRadius: 18,
+        background: "rgba(255,255,255,0.14)",
+        border: "1px solid rgba(255,255,255,0.18)",
+        display: "grid",
+        placeItems: "center",
+        textDecoration: "none",
+        color: "white",
+        fontWeight: 800,
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
+    >
+      {text}
+    </a>
+  );
+}
+
 export default async function Page() {
-  // Aproximado por IP (en Vercel suele venir, en local puede ser vacío)
+  // Ubicación aproximada por IP (en Vercel)
+  // En localhost puede salir "Desconocida" y es normal.
   const h = await headers();
   const city = h.get("x-vercel-ip-city") || "";
   const country = h.get("x-vercel-ip-country") || "";
-  const locationText =
-    city || country ? `${city}${city && country ? ", " : ""}${country}` : "Unknown location";
+  const location = city && country ? `${city}, ${country}` : "Desconocida";
 
-  // Cambia esto por el nombre del modelo
-  const MODEL_NAME = "RAUL TOMAS";
+  // Datos del creador (cámbialos por cada modelo)
+  const NAME = "RAUL TOMAS";
+  const PROMO = "60% OFF";
 
-  // Cambia links
-  const LINKS = {
-    of: "https://onlyfans.com/raulthomasss", // OF (principal)
-    instagram: "https://www.instagram.com/raul.tomass/",
-    Facebook: "https://www.facebook.com/people/Raul-Tomas/pfbid0C6XECbaQUvRzTFWaxxdXYvBGFR7ujoBM7fQ2hQep3gxzXeMKmJcikwpMo5PZ5c2Tl/?mibextid=wwXIfr&rdid=vbuhLxqsnMedqhrJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AQZNvoQhb%2F%3Fmibextid%3DwwXIfr",
-    x: "https://x.com/mamuttdehielo?s=21",
-  };
+  // Fecha fin de promo (ISO). Ej: 2026-02-02T23:59:59Z
+  const ENDS_AT = new Date(Date.now() + 15 * 60 * 1000).toISOString();
 
-const COVER_IMAGE = "/model/cover.jpg";
+  // Links (pon los reales)
+  const LINK_MAIN = "https://onlyfans.com/raulthomasss";     // tu link principal / plataforma
+  const LINK_IG = "https://www.instagram.com/raul.tomass/";     // instagram
+  const LINK_X = "https://x.com/mamuttdehielo?s=21";              // x/twitter
+  const LINK_FB = "https://www.facebook.com/profile.php?id=61586974165190&mibextid=wwXIfr&rdid=qLUnRZqKnrZnqesZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AQZNvoQhb%2F%3Fmibextid%3DwwXIfr";      // facebook
+
   return (
     <main
-  style={{
-    minHeight: "100vh",
-    background: `
-      linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
-      url(${COVER_IMAGE}) center / cover no-repeat
-    `,
-    color: "white",
-    display: "grid",
-    placeItems: "center",
-    padding: 24,
-  }}
->
+      style={{
+        minHeight: "100vh",
+        display: "grid",
+        placeItems: "center",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      <div style={{ width: "100%", maxWidth: 720 }}>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 52, fontWeight: 900, letterSpacing: -1 }}>
-            {MODEL_NAME}
-          </div>
+      {/* FONDO */}
+      <Image
+        src="/bg.jpg"
+        alt="background"
+        fill
+        priority
+        style={{ objectFit: "cover" }}
+      />
 
-          <div style={{ marginTop: 10, fontSize: 14, opacity: 0.75 }}>
-            Viewing from: <span style={{ fontWeight: 700 }}>{locationText}</span>
-          </div>
-
-          <Countdown minutes={15} />
-
-          {/* Botón principal */}
-          <a
-            href={LINKS.of}
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              display: "block",
-              margin: "26px auto 0",
-              textDecoration: "none",
-              padding: "18px 18px",
-              borderRadius: 18,
-              fontWeight: 900,
-              fontSize: 18,
-              textAlign: "center",
-              border: "1px solid rgba(255,255,255,0.18)",
-              background: "rgba(255,255,255,0.12)",
-              boxShadow: "0 12px 30px rgba(0,0,0,0.35)",
-            }}
-          >
-            ⭐️ OF
-          </a>
-
-          {/* Links secundarios */}
+      {/* TARJETA */}
+      <div
+        style={{
+          width: 420,
+          maxWidth: "92vw",
+          borderRadius: 28,
+          padding: 26,
+          background: "rgba(255,255,255,0.12)",
+          border: "1px solid rgba(255,255,255,0.18)",
+          boxShadow: "0 20px 70px rgba(0,0,0,0.35)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          color: "white",
+        }}
+      >
+        <div style={{ display: "grid", placeItems: "center", gap: 14 }}>
+          {/* AVATAR */}
           <div
             style={{
-              marginTop: 18,
-              display: "flex",
-              justifyContent: "center",
-              gap: 12,
-              flexWrap: "wrap",
+              width: 112,
+              height: 112,
+              borderRadius: 999,
+              overflow: "hidden",
+              border: "4px solid rgba(255,255,255,0.9)",
+            }}
+          >
+            <Image
+              src="/avatar.jpg"
+              alt="avatar"
+              width={112}
+              height={112}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+
+          {/* NOMBRE + UBICACIÓN */}
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: 1 }}>
+              {NAME}
+            </div>
+            <div style={{ opacity: 0.9, fontSize: 20 }}>{location}</div>
+          </div>
+
+          {/* PROMO */}
+          <div style={{ marginTop: 8, marginBottom: 8 }}>
+            <span
+              style={{
+                padding: "10px 18px",
+                borderRadius: 999,
+                background: "rgba(0, 200, 255, 0.20)",
+                border: "1px solid rgba(0,200,255,0.35)",
+                color: "rgba(0,200,255,0.95)",
+                fontWeight: 900,
+                letterSpacing: 1,
+                fontSize: 22,
+              }}
+            >
+              {PROMO}
+            </span>
+          </div>
+
+          {/* FOTO VERTICAL + COUNTDOWN */}
+          <div
+            style={{
+              width: "100%",
+              borderRadius: 22,
+              overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.18)",
+              background: "rgba(0,0,0,0.2)",
             }}
           >
             <a
-              href={LINKS.instagram}
-              target="_blank"
-              rel="noreferrer"
-              style={chipStyle}
-            >
-              📸 Instagram
-            </a>
-            <a href={LINKS.tiktok} target="_blank" rel="noreferrer" style={chipStyle}>
-              🎵 TikTok
-            </a>
-            <a href={LINKS.x} target="_blank" rel="noreferrer" style={chipStyle}>
-              🐦 X
-            </a>
+  href={LINK_MAIN}
+  target="_blank"
+  rel="noreferrer"
+  style={{ display: "block", position: "relative" }}
+>
+  <Image
+    src="/card.jpg"
+    alt="card"
+    width={900}
+    height={900}
+    style={{ width: "100%", height: 240, objectFit: "cover", cursor: "pointer" }}
+  />
+
+  {/* (Opcional) badge arriba para que se entienda que es clicable */}
+  <div
+    style={{
+      position: "absolute",
+      top: 12,
+      right: 12,
+      padding: "8px 12px",
+      borderRadius: 999,
+      background: "rgba(0,0,0,0.55)",
+      border: "1px solid rgba(255,255,255,0.18)",
+      fontWeight: 900,
+      fontSize: 12,
+      color: "white",
+      backdropFilter: "blur(10px)",
+      WebkitBackdropFilter: "blur(10px)",
+    }}
+  >
+    OF 🔒
+  </div>
+</a>
+
+
+            <div style={{ padding: 18 }}>
+              <Countdown endsAtISO={ENDS_AT} />
+            </div>
           </div>
 
-          <div style={{ marginTop: 18, fontSize: 12, opacity: 0.6 }}>
-            Location is approximate (IP-based). Timer is on-page (resets on refresh).
+          {/* LINKS */}
+          <div style={{ display: "flex", gap: 14, marginTop: 16 }}>
+            <IconButton href={LINK_MAIN} text="OF🔒" />
+            <IconButton href={LINK_IG} text="IG" />
+            <IconButton href={LINK_X} text="X" />
+            <IconButton href={LINK_FB} text="F" />
+          </div>
+
+          <div style={{ marginTop: 10, fontSize: 12, opacity: 0.7, textAlign: "center" }}>
+            Ubicación aproximada por IP.
           </div>
         </div>
       </div>
     </main>
   );
 }
-
-const chipStyle: React.CSSProperties = {
-  textDecoration: "none",
-  color: "white",
-  padding: "10px 14px",
-  borderRadius: 999,
-  border: "1px solid rgba(255,255,255,0.14)",
-  background: "rgba(255,255,255,0.06)",
-  fontWeight: 700,
-  fontSize: 14,
-};
