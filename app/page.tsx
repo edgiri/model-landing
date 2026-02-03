@@ -10,14 +10,14 @@ export default async function Page() {
     city || country ? `${city}${city && country ? ", " : ""}${country}` : "Unknown location";
 
   // Cambia esto por el nombre del modelo
-  const MODEL_NAME = "MODEL NAME";
+  const MODEL_NAME = "RAUL TOMAS";
 
   // Cambia links
   const LINKS = {
-    of: "https://example.com", // OF (principal)
-    instagram: "https://instagram.com/",
-    tiktok: "https://tiktok.com/",
-    x: "https://x.com/",
+    of: "https://onlyfans.com/raulthomasss", // OF (principal)
+    instagram: "https://www.instagram.com/raul.tomass/",
+    Facebook: "https://www.facebook.com/people/Raul-Tomas/pfbid0C6XECbaQUvRzTFWaxxdXYvBGFR7ujoBM7fQ2hQep3gxzXeMKmJcikwpMo5PZ5c2Tl/?mibextid=wwXIfr&rdid=vbuhLxqsnMedqhrJ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AQZNvoQhb%2F%3Fmibextid%3DwwXIfr",
+    x: "https://x.com/mamuttdehielo?s=21",
   };
 
   return (
