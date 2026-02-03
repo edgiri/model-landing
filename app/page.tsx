@@ -172,7 +172,7 @@ export default async function Page() {
             </a>
 
             <div style={{ padding: "clamp(12px, 3vw, 18px)" }}>
-              <Countdown endsAtISO={ENDS_AT} />
+              <Countdown minutes={15} storageKey="raul-tomas-endsAt" />
             </div>
           </div>
 
@@ -182,10 +182,6 @@ export default async function Page() {
             <IconButton href={LINK_IG} text="IG" />
             <IconButton href={LINK_X} text="X" />
             <IconButton href={LINK_FB} text="F" />
-          </div>
-
-          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7, textAlign: "center" }}>
-            Ubicación aproximada por IP.
           </div>
         </div>
       </div>
