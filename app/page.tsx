@@ -40,14 +40,15 @@ export default async function Page() {
   const NAME = "RAUL TOMAS";
   const PROMO = "60% OFF";
 
-  // Fecha fin de promo (ISO). Ej: 2026-02-02T23:59:59Z
+  // 15 min desde que carga (se reinicia al refrescar)
   const ENDS_AT = new Date(Date.now() + 15 * 60 * 1000).toISOString();
 
-  // Links (pon los reales)
-  const LINK_MAIN = "https://onlyfans.com/raulthomasss";     // tu link principal / plataforma
-  const LINK_IG = "https://www.instagram.com/raul.tomass/";     // instagram
-  const LINK_X = "https://x.com/mamuttdehielo?s=21";              // x/twitter
-  const LINK_FB = "https://www.facebook.com/profile.php?id=61586974165190&mibextid=wwXIfr&rdid=qLUnRZqKnrZnqesZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AQZNvoQhb%2F%3Fmibextid%3DwwXIfr";      // facebook
+  // Links
+  const LINK_MAIN = "https://onlyfans.com/raulthomasss";
+  const LINK_IG = "https://www.instagram.com/raul.tomass/";
+  const LINK_X = "https://x.com/mamuttdehielo?s=21";
+  const LINK_FB =
+    "https://www.facebook.com/profile.php?id=61586974165190&mibextid=wwXIfr&rdid=qLUnRZqKnrZnqesZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AQZNvoQhb%2F%3Fmibextid%3DwwXIfr";
 
   return (
     <main
@@ -57,24 +58,18 @@ export default async function Page() {
         placeItems: "center",
         position: "relative",
         overflow: "hidden",
+        padding: "clamp(12px, 4vw, 28px)", // ✅ más cómodo en móvil
       }}
     >
       {/* FONDO */}
-      <Image
-        src="/bg.jpg"
-        alt="background"
-        fill
-        priority
-        style={{ objectFit: "cover" }}
-      />
+      <Image src="/bg.jpg" alt="background" fill priority style={{ objectFit: "cover" }} />
 
-      {/* TARJETA */}
+      {/* TARJETA (responsive) */}
       <div
         style={{
-          width: 420,
-          maxWidth: "92vw",
-          borderRadius: 28,
-          padding: 26,
+          width: "min(420px, 92vw)",
+          borderRadius: "clamp(20px, 4vw, 28px)",
+          padding: "clamp(16px, 4vw, 26px)", // ✅ menos padding en móvil
           background: "rgba(255,255,255,0.12)",
           border: "1px solid rgba(255,255,255,0.18)",
           boxShadow: "0 20px 70px rgba(0,0,0,0.35)",
@@ -83,36 +78,37 @@ export default async function Page() {
           color: "white",
         }}
       >
-        <div style={{ display: "grid", placeItems: "center", gap: 14 }}>
+        <div style={{ display: "grid", placeItems: "center", gap: "clamp(10px, 2.8vw, 14px)" }}>
           {/* AVATAR */}
           <div
             style={{
-              width: 112,
-              height: 112,
+              width: "clamp(84px, 18vw, 112px)", // ✅ se adapta al móvil
+              height: "clamp(84px, 18vw, 112px)",
               borderRadius: 999,
               overflow: "hidden",
               border: "4px solid rgba(255,255,255,0.9)",
             }}
           >
-            <Image
-              src="/avatar.jpg"
-              alt="avatar"
-              width={112}
-              height={112}
-              style={{ objectFit: "cover" }}
-            />
+            <Image src="/avatar.jpg" alt="avatar" width={112} height={112} style={{ objectFit: "cover" }} />
           </div>
 
           {/* NOMBRE + UBICACIÓN */}
           <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 44, fontWeight: 900, letterSpacing: 1 }}>
+            <div
+              style={{
+                fontSize: "clamp(30px, 7.5vw, 44px)", // ✅ antes fijo, ahora responsive
+                fontWeight: 900,
+                letterSpacing: 1,
+                lineHeight: 1.05, // ✅ evita que se “rompa” en móvil
+              }}
+            >
               {NAME}
             </div>
-            <div style={{ opacity: 0.9, fontSize: 20 }}>{location}</div>
+            <div style={{ opacity: 0.9, fontSize: "clamp(16px, 4.2vw, 20px)" }}>{location}</div>
           </div>
 
           {/* PROMO */}
-          <div style={{ marginTop: 8, marginBottom: 8 }}>
+          <div style={{ marginTop: 6, marginBottom: 6 }}>
             <span
               style={{
                 padding: "10px 18px",
@@ -122,73 +118,73 @@ export default async function Page() {
                 color: "rgba(0,200,255,0.95)",
                 fontWeight: 900,
                 letterSpacing: 1,
-                fontSize: 22,
+                fontSize: "clamp(18px, 4.8vw, 22px)", // ✅ responsive
               }}
             >
               {PROMO}
             </span>
           </div>
 
-          {/* FOTO VERTICAL + COUNTDOWN */}
+          {/* FOTO + COUNTDOWN */}
           <div
             style={{
               width: "100%",
-              borderRadius: 22,
+              borderRadius: "clamp(16px, 3.8vw, 22px)",
               overflow: "hidden",
               border: "1px solid rgba(255,255,255,0.18)",
               background: "rgba(0,0,0,0.2)",
             }}
           >
-            <a
-  href={LINK_MAIN}
-  target="_blank"
-  rel="noreferrer"
-  style={{ display: "block", position: "relative" }}
->
-  <Image
-    src="/card.jpg"
-    alt="card"
-    width={900}
-    height={900}
-    style={{ width: "100%", height: 240, objectFit: "cover", cursor: "pointer" }}
-  />
+            <a href={LINK_MAIN} target="_blank" rel="noreferrer" style={{ display: "block", position: "relative" }}>
+              <Image
+                src="/card.jpg"
+                alt="card"
+                width={900}
+                height={900}
+                style={{
+                  width: "100%",
+                  height: "clamp(170px, 42vw, 240px)", // ✅ antes 240 fijo, ahora se adapta
+                  objectFit: "cover",
+                  cursor: "pointer",
+                  display: "block",
+                }}
+              />
 
-  {/* (Opcional) badge arriba para que se entienda que es clicable */}
-  <div
-    style={{
-      position: "absolute",
-      top: 12,
-      right: 12,
-      padding: "8px 12px",
-      borderRadius: 999,
-      background: "rgba(0,0,0,0.55)",
-      border: "1px solid rgba(255,255,255,0.18)",
-      fontWeight: 900,
-      fontSize: 12,
-      color: "white",
-      backdropFilter: "blur(10px)",
-      WebkitBackdropFilter: "blur(10px)",
-    }}
-  >
-    OF 🔒
-  </div>
-</a>
+              {/* badge */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 12,
+                  right: 12,
+                  padding: "8px 12px",
+                  borderRadius: 999,
+                  background: "rgba(0,0,0,0.55)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  fontWeight: 900,
+                  fontSize: 12,
+                  color: "white",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                }}
+              >
+                OF 🔒
+              </div>
+            </a>
 
-
-            <div style={{ padding: 18 }}>
+            <div style={{ padding: "clamp(12px, 3vw, 18px)" }}>
               <Countdown endsAtISO={ENDS_AT} />
             </div>
           </div>
 
           {/* LINKS */}
-          <div style={{ display: "flex", gap: 14, marginTop: 16 }}>
+          <div style={{ display: "flex", gap: 14, marginTop: 14, flexWrap: "wrap", justifyContent: "center" }}>
             <IconButton href={LINK_MAIN} text="OF🔒" />
             <IconButton href={LINK_IG} text="IG" />
             <IconButton href={LINK_X} text="X" />
             <IconButton href={LINK_FB} text="F" />
           </div>
 
-          <div style={{ marginTop: 10, fontSize: 12, opacity: 0.7, textAlign: "center" }}>
+          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7, textAlign: "center" }}>
             Ubicación aproximada por IP.
           </div>
         </div>
@@ -196,3 +192,4 @@ export default async function Page() {
     </main>
   );
 }
+
