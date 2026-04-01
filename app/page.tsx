@@ -2,190 +2,209 @@ import Image from "next/image";
 import { headers } from "next/headers";
 import Countdown from "./components/Countdown";
 
-function IconButton({ href, text }: { href: string; text: string }) {
+function IconButton({ href, text, emoji }: { 
+  href: string; 
+  text: string; 
+  emoji?: string 
+}) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
       style={{
-        width: 68,
-        height: 68,
-        borderRadius: 18,
-        background: "rgba(255,255,255,0.14)",
-        border: "1px solid rgba(255,255,255,0.18)",
+        minWidth: 72,
+        height: 72,
+        borderRadius: 20,
+        background: "rgba(255,255,255,0.13)",
+        border: "1px solid rgba(255,255,255,0.20)",
         display: "grid",
         placeItems: "center",
         textDecoration: "none",
         color: "white",
         fontWeight: 800,
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        fontSize: "14.5px",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
+        transition: "all 0.25s ease",
+      }}
+      onMouseOver={(e) => {
+        e.currentTarget.style.background = "rgba(255,255,255,0.24)";
+        e.currentTarget.style.transform = "translateY(-2px)";
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.background = "rgba(255,255,255,0.13)";
+        e.currentTarget.style.transform = "translateY(0)";
       }}
     >
+      {emoji && <span style={{ fontSize: "18px", marginBottom: 3 }}>{emoji}</span>}
       {text}
     </a>
   );
 }
 
 export default async function Page() {
-  // Ubicación aproximada por IP (en Vercel)
-  // En localhost puede salir "Desconocida" y es normal.
   const h = await headers();
   const city = h.get("x-vercel-ip-city") || "";
   const country = h.get("x-vercel-ip-country") || "";
-  const location = city && country ? `${city}, ${country}` : "Desconocida";
+  const location = city && country ? `${city}, ${country}` : "🌍 Online Now";
 
-  // Datos del creador (cámbialos por cada modelo)
-  const NAME = "RAUL TOMAS";
-  const PROMO = "60% OFF";
+  // === DATOS DE ERIN MIA JAMES ===
+  const NAME = "ERIN MIA JAMES";
+  const PROMO = "75% OFF · JUST TODAY";
 
-  // 15 min desde que carga (se reinicia al refrescar)
-  const ENDS_AT = new Date(Date.now() + 15 * 60 * 1000).toISOString();
-
-  // Links
-  const LINK_MAIN = "https://onlyfans.com/raulthomasss";
-  const LINK_IG = "https://www.instagram.com/raul.tomass/";
-  const LINK_X = "https://x.com/mamuttdehielo?s=21";
-  const LINK_FB =
-    "https://www.facebook.com/profile.php?id=61586974165190&mibextid=wwXIfr&rdid=qLUnRZqKnrZnqesZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AQZNvoQhb%2F%3Fmibextid%3DwwXIfr";
+  const LINK_OF = "https://onlyfans.com/erinmiajames";
+  const LINK_IG = "https://www.instagram.com/erinmiajamesagain/";
+  const LINK_TIKTOK = "https://www.tiktok.com/@itserinmiajames";
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "grid",
-        placeItems: "center",
-        position: "relative",
-        overflow: "hidden",
-        padding: "clamp(12px, 4vw, 28px)", // ✅ más cómodo en móvil
-      }}
-    >
-      {/* FONDO */}
-      <Image src="/bg.jpg" alt="background" fill priority style={{ objectFit: "cover" }} />
+    <main style={{
+      minHeight: "100vh",
+      display: "grid",
+      placeItems: "center",
+      position: "relative",
+      overflow: "hidden",
+      padding: "clamp(12px, 4vw, 28px)",
+      background: "#050505",
+    }}>
+      {/* Fondo */}
+      <Image 
+        src="/bg.jpg" 
+        alt="background" 
+        fill 
+        priority 
+        style={{ objectFit: "cover", opacity: 0.9 }} 
+      />
 
-      {/* TARJETA (responsive) */}
-      <div
-        style={{
-          width: "min(420px, 92vw)",
-          borderRadius: "clamp(20px, 4vw, 28px)",
-          padding: "clamp(16px, 4vw, 26px)", // ✅ menos padding en móvil
-          background: "rgba(255,255,255,0.12)",
-          border: "1px solid rgba(255,255,255,0.18)",
-          boxShadow: "0 20px 70px rgba(0,0,0,0.35)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-          color: "white",
-        }}
-      >
-        <div style={{ display: "grid", placeItems: "center", gap: "clamp(10px, 2.8vw, 14px)" }}>
-          {/* AVATAR */}
-          <div
-            style={{
-              width: "clamp(84px, 18vw, 112px)", // ✅ se adapta al móvil
-              height: "clamp(84px, 18vw, 112px)",
-              borderRadius: 999,
-              overflow: "hidden",
-              border: "4px solid rgba(255,255,255,0.9)",
-            }}
-          >
-            <Image src="/avatar.jpg" alt="avatar" width={112} height={112} style={{ objectFit: "cover" }} />
+      {/* Tarjeta principal */}
+      <div style={{
+        width: "min(428px, 92vw)",
+        borderRadius: "clamp(24px, 5vw, 34px)",
+        padding: "clamp(22px, 5.5vw, 34px)",
+        background: "rgba(255,255,255,0.09)",
+        border: "1px solid rgba(255,255,255,0.16)",
+        boxShadow: "0 30px 90px rgba(0,0,0,0.55)",
+        backdropFilter: "blur(22px)",
+        WebkitBackdropFilter: "blur(22px)",
+        color: "white",
+      }}>
+        <div style={{ display: "grid", placeItems: "center", gap: "clamp(14px, 3.5vw, 20px)" }}>
+
+          {/* Avatar */}
+          <div style={{
+            width: "clamp(96px, 21vw, 122px)",
+            height: "clamp(96px, 21vw, 122px)",
+            borderRadius: "999px",
+            overflow: "hidden",
+            border: "5px solid rgba(255,255,255,0.95)",
+            boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
+          }}>
+            <Image 
+              src="/avatar.jpg" 
+              alt="Erin Mia James" 
+              width={130} 
+              height={130} 
+              style={{ objectFit: "cover" }} 
+            />
           </div>
 
-          {/* NOMBRE + UBICACIÓN */}
+          {/* Nombre + Ubicación */}
           <div style={{ textAlign: "center" }}>
-            <div
-              style={{
-                fontSize: "clamp(30px, 7.5vw, 44px)", // ✅ antes fijo, ahora responsive
-                fontWeight: 900,
-                letterSpacing: 1,
-                lineHeight: 1.05, // ✅ evita que se “rompa” en móvil
-              }}
-            >
+            <h1 style={{
+              fontSize: "clamp(34px, 8.2vw, 50px)",
+              fontWeight: 900,
+              letterSpacing: "-1px",
+              lineHeight: 1.05,
+              margin: 0,
+            }}>
               {NAME}
-            </div>
-            <div style={{ opacity: 0.9, fontSize: "clamp(16px, 4.2vw, 20px)" }}>{location}</div>
+            </h1>
+            <p style={{ 
+              opacity: 0.85, 
+              fontSize: "clamp(15.5px, 4.1vw, 19px)", 
+              margin: "8px 0 0" 
+            }}>
+              {location}
+            </p>
           </div>
 
-          {/* PROMO */}
-          <div style={{ marginTop: 6, marginBottom: 6 }}>
-            <span
-              style={{
-                padding: "10px 18px",
-                borderRadius: 999,
-                background: "rgba(0, 200, 255, 0.20)",
-                border: "1px solid rgba(0,200,255,0.35)",
-                color: "rgba(0,200,255,0.95)",
-                fontWeight: 900,
-                letterSpacing: 1,
-                fontSize: "clamp(18px, 4.8vw, 22px)", // ✅ responsive
-              }}
-            >
+          {/* Promo */}
+          <div>
+            <span style={{
+              padding: "11px 26px",
+              borderRadius: "999px",
+              background: "rgba(255, 60, 120, 0.22)",
+              border: "1px solid rgba(255, 80, 140, 0.45)",
+              color: "#ff4d94",
+              fontWeight: 900,
+              fontSize: "clamp(19px, 5vw, 24px)",
+              letterSpacing: "0.6px",
+            }}>
               {PROMO}
             </span>
           </div>
 
-          {/* FOTO + COUNTDOWN */}
-          <div
-            style={{
-              width: "100%",
-              borderRadius: "clamp(16px, 3.8vw, 22px)",
-              overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.18)",
-              background: "rgba(0,0,0,0.2)",
-            }}
-          >
-            <a href={LINK_MAIN} target="_blank" rel="noreferrer" style={{ display: "block", position: "relative" }}>
+          {/* Foto + Countdown */}
+          <div style={{
+            width: "100%",
+            borderRadius: "clamp(18px, 4.5vw, 26px)",
+            overflow: "hidden",
+            border: "1px solid rgba(255,255,255,0.17)",
+            background: "rgba(0,0,0,0.28)",
+          }}>
+            <a 
+              href={LINK_OF} 
+              target="_blank" 
+              rel="noreferrer" 
+              style={{ display: "block", position: "relative" }}
+            >
               <Image
                 src="/card.jpg"
-                alt="card"
+                alt="Erin Mia James"
                 width={900}
-                height={900}
+                height={520}
                 style={{
                   width: "100%",
-                  height: "clamp(170px, 42vw, 240px)", // ✅ antes 240 fijo, ahora se adapta
+                  height: "clamp(195px, 46vw, 270px)",
                   objectFit: "cover",
-                  cursor: "pointer",
-                  display: "block",
                 }}
               />
-
-              {/* badge */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 12,
-                  right: 12,
-                  padding: "8px 12px",
-                  borderRadius: 999,
-                  background: "rgba(0,0,0,0.55)",
-                  border: "1px solid rgba(255,255,255,0.18)",
-                  fontWeight: 900,
-                  fontSize: 12,
-                  color: "white",
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
-                }}
-              >
-                OF 🔒
+              <div style={{
+                position: "absolute",
+                top: 16,
+                right: 16,
+                padding: "9px 16px",
+                borderRadius: 999,
+                background: "rgba(0,0,0,0.70)",
+                border: "1px solid rgba(255,255,255,0.25)",
+                fontSize: "13px",
+                fontWeight: 900,
+                backdropFilter: "blur(10px)",
+              }}>
+                ONLYFANS 🔒
               </div>
             </a>
 
-            <div style={{ padding: "clamp(12px, 3vw, 18px)" }}>
-              <Countdown minutes={15} storageKey="raul-tomas-endsAt" />
+            <div style={{ padding: "clamp(16px, 4vw, 22px)" }}>
+              <Countdown minutes={15} storageKey="erin-mia-james-endsAt" />
             </div>
           </div>
 
-          {/* LINKS */}
-          <div style={{ display: "flex", gap: 14, marginTop: 14, flexWrap: "wrap", justifyContent: "center" }}>
-            <IconButton href={LINK_MAIN} text="OF🔒" />
-            <IconButton href={LINK_IG} text="IG" />
-            <IconButton href={LINK_X} text="X" />
-            <IconButton href={LINK_FB} text="F" />
+          {/* Redes Sociales */}
+          <div style={{ 
+            display: "flex", 
+            gap: 16, 
+            marginTop: 12, 
+            flexWrap: "wrap", 
+            justifyContent: "center" 
+          }}>
+            <IconButton href={LINK_OF} text="ONLYFANS" emoji="🔥" />
+            <IconButton href={LINK_IG} text="INSTAGRAM" emoji="📷" />
+            <IconButton href={LINK_TIKTOK} text="TIKTOK" emoji="🎵" />
           </div>
+
         </div>
       </div>
     </main>
   );
 }
-
