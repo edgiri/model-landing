@@ -1,3 +1,27 @@
+
+[main 704bb8f] comprimir imágenes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 252.01 KiB | 36.00 MiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/edgiri/model-landing.git
+   3c3b2d0..704bb8f  main -> main
+edgiri@MacBook-Pro-de-Edgar model-landing % cd ~/model-landing
+git add .
+git commit -m "comprimir imágenes"
+git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+Everything up-to-date
+edgiri@MacBook-Pro-de-Edgar model-landing % 
+edgiri@MacBook-Pro-de-Edgar model-landing % 
+edgiri@MacBook-Pro-de-Edgar model-landing % cat ~/model-landing/app/page.tsx
 import Image from "next/image";
 import { headers } from "next/headers";
 import Countdown from "./components/Countdown";
@@ -207,4 +231,4 @@ export default async function Page() {
       </div>
     </main>
   );
-}
+}%                                                                                                                      edgiri@MacBook-Pro-de-Edgar model-landing % 
