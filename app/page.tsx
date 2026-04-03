@@ -51,7 +51,7 @@ export default async function Page() {
   const h = await headers();
   const city = h.get("x-vercel-ip-city") || "";
   const country = h.get("x-vercel-ip-country") || "";
-  const location = city && country ? `${city}, ${country}` : "Desconocida";
+ const location = city && country ? `${decodeURIComponent(city)}, ${country}` : "Desconocida";
 
   const NAME = "RAUL TOMAS";
   const PROMO = "60% OFF";
