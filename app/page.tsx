@@ -151,7 +151,7 @@ export default async function Page() {
           </div>
 
           {/* CARD IMAGE */}
-          
+          <a
             href={LINK_MAIN}
             target={"_blank"}
             rel={"noreferrer"}
