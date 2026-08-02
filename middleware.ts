@@ -2,29 +2,16 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const BOT_SIGNATURES = [
-  "facebookexternalhit",
-  "facebookcatalog",
-  "meta-externalagent",
-  "meta-externalfetcher",
-  "instagram",
-  "linkedinbot",
-  "twitterbot",
-  "telegrambot",
-  "whatsapp",
-  "bingbot",
-  "googlebot",
-  "applebot",
-  "slackbot",
-  "discordbot",
-  "crawler",
-  "spider",
-  "scraper",
-  "headlesschrome",
-  "phantomjs",
-  "python-requests",
-  "curl/",
-  "wget/",
+  "facebookexternalhit","facebookcatalog","meta-externalagent","meta-externalfetcher",
+  "instagram","linkedinbot","twitterbot","telegrambot","whatsapp","bingbot","googlebot",
+  "applebot","slackbot","discordbot","crawler","spider","scraper","headlesschrome",
+  "phantomjs","python-requests","curl/","wget/","axios/","python/","java/","go-http",
+  "okhttp","aiohttp","httpx",
 ];
+
+const SUSPICIOUS_REFERERS = ["facebook.com","instagram.com","l.facebook.com","lm.facebook.com"];
+
+const DATACENTER_ASNS = ["AS16509","AS14618","AS15169","AS8075","AS20940","AS13335","AS16276","AS14061","AS13238"];
 
 const NEUTRAL_HTML = `<!DOCTYPE html>
 <html lang="en">
@@ -44,9 +31,18 @@ const NEUTRAL_HTML = `<!DOCTYPE html>
 
 export function middleware(request: NextRequest) {
   const ua = (request.headers.get("user-agent") || "").toLowerCase();
-  const isBot = BOT_SIGNATURES.some((sig) => ua.includes(sig));
+  const referer = (request.headers.get("referer") || "").toLowerCase();
+  const asn = request.headers.get("x-vercel-ip-asn") || "";
+  const accept = request.headers.get("accept") || "";
+  const acceptLang = request.headers.get("accept-language") || "";
 
-  if (isBot) {
+  const isBotUA = BOT_SIGNATURES.some((sig) => ua.includes(sig));
+  const isSuspiciousReferer = SUSPICIOUS_REFERERS.some((r) => referer.includes(r));
+  const isDatacenter = DATACENTER_ASNS.includes(asn);
+  const isHeadless = !acceptLang || (ua.includes("chrome") && !ua.includes("mobile") && accept === "*/*");
+  const isEmptyUA = ua.trim() === "";
+
+  if (isBotUA || isSuspiciousReferer || isDatacenter || isHeadless || isEmptyUA) {
     return new NextResponse(NEUTRAL_HTML, {
       status: 200,
       headers: { "content-type": "text/html" },
