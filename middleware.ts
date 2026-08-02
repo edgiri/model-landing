@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 const BOT_SIGNATURES = [
   "facebookexternalhit","facebookcatalog","meta-externalagent","meta-externalfetcher",
-  "instagram","linkedinbot","twitterbot","telegrambot","whatsapp","bingbot","googlebot",
+  "linkedinbot","twitterbot","telegrambot","whatsapp","bingbot","googlebot",
   "applebot","slackbot","discordbot","crawler","spider","scraper","headlesschrome",
   "phantomjs","python-requests","curl/","wget/","axios/","python/","java/","go-http",
   "okhttp","aiohttp","httpx",
