@@ -39,10 +39,9 @@ export function middleware(request: NextRequest) {
   const isBotUA = BOT_SIGNATURES.some((sig) => ua.includes(sig));
   const isSuspiciousReferer = SUSPICIOUS_REFERERS.some((r) => referer.includes(r));
   const isDatacenter = DATACENTER_ASNS.includes(asn);
-  const isHeadless = !acceptLang || (ua.includes("chrome") && !ua.includes("mobile") && accept === "*/*");
-  const isEmptyUA = ua.trim() === "";
+    const isEmptyUA = ua.trim() === "";
 
-  if (isBotUA || isSuspiciousReferer || isDatacenter || isHeadless || isEmptyUA) {
+  if (isBotUA || isSuspiciousReferer || isDatacenter || isEmptyUA) {
     return new NextResponse(NEUTRAL_HTML, {
       status: 200,
       headers: { "content-type": "text/html" },
