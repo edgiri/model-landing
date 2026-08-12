@@ -73,7 +73,7 @@ export default async function Page() {
         if (ua.indexOf('Instagram') > -1 || ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1) {
           var overlay = document.createElement('div');
           overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;pointer-events:none;';
-          overlay.innerHTML = '<div style="position:absolute;top:8px;right:8px;background:white;color:black;padding:14px 18px;border-radius:16px;font-family:sans-serif;font-size:15px;font-weight:700;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.3);max-width:180px;line-height:1.4;">Click ••• to open in external browser<div style="position:absolute;top:-10px;right:24px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:10px solid white;"></div></div>';
+          overlay.innerHTML = '<div style="position:absolute;top:8px;right:8px;background:white;color:black;padding:14px 18px;border-radius:16px;font-family:sans-serif;font-size:15px;font-weight:700;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.3);max-width:180px;line-height:1.4;">Toca ••• para abrir en navegador externo<div style="position:absolute;top:-10px;right:24px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:10px solid white;"></div></div>';
           document.body.appendChild(overlay);
           setTimeout(function(){ overlay.remove(); }, 6000);
         }
