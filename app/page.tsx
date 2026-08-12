@@ -70,13 +70,11 @@ export default async function Page() {
     <script dangerouslySetInnerHTML={{ __html: `
       (function() {
         var ua = navigator.userAgent || '';
-        var isIGBrowser = ua.indexOf('Instagram') > -1;
-        if (isIGBrowser) {
-          var url = window.location.href;
-          window.location.href = 'googlechrome://' + url.replace(/^https?:\/\//, '');
-          setTimeout(function() {
-            window.location.href = url;
-          }, 500);
+        if (ua.indexOf('Instagram') > -1 || ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1) {
+          var banner = document.createElement('div');
+          banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#1a1a1a;color:white;padding:14px 16px;font-family:sans-serif;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 2px 12px rgba(0,0,0,0.5);';
+          banner.innerHTML = '<span style="font-size:18px">🌐</span><span>Para una mejor experiencia, abre en Safari · Toca <strong>⋯</strong> y selecciona <strong>Abrir en navegador</strong></span>';
+          document.body.appendChild(banner);
         }
       })();
     `}} />
