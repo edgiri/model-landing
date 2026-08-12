@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { headers } from "next/headers";
 import Countdown from "./components/Countdown";
+import AgeGate from "./components/AgeGate";
 
 const IconIG = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -164,12 +165,7 @@ export default async function Page() {
           </div>
 
           {/* CARD IMAGE */}
-          <a
-            href={LINK_MAIN}
-            target={"_blank"}
-            rel={"noreferrer"}
-            style={{ display: "block", position: "relative", width: "100%", borderRadius: 16, overflow: "hidden" }}
-          >
+          <AgeGate href={LINK_MAIN}>
             <Image
               src="/card.jpg"
               alt="exclusive"
@@ -194,7 +190,7 @@ export default async function Page() {
             }}>
               🩵 EXCLUSIVE CONTENT · CLICK HERE
             </div>
-          </a>
+          </AgeGate>
         </div>
       </div>
     </main>
