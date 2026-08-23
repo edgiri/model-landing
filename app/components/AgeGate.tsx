@@ -6,13 +6,7 @@ export default function AgeGate({ href, children }: { href: string; children: Re
   const [blocked, setBlocked] = useState(false);
 
   const handleClick = () => {
-    const ua = navigator.userAgent || "";
-    const isInAppBrowser = ua.includes("Instagram") || ua.includes("FBAN") || ua.includes("FBAV");
-    if (isInAppBrowser) {
-      setBlocked(true);
-    } else {
-      setOpen(true);
-    }
+    setOpen(true);
   };
 
   return (
