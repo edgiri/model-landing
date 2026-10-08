@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { headers } from "next/headers";
 import Countdown from "./components/Countdown";
 import AgeGate from "./components/AgeGate";
 
@@ -53,10 +52,7 @@ function SocialButton({ href, children }: { href: string; children: React.ReactN
   );
 }
 
-export default async function Page() {
-  const h = await headers();
-  const city = h.get("x-vercel-ip-city") || "";
-  const country = h.get("x-vercel-ip-country") || "";
+export default function Page() {
   const location = "Madrid, Spain";
 
   const NAME = "Raul Tomas";
